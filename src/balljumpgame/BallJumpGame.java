@@ -51,6 +51,8 @@ public class BallJumpGame extends BasicGame{
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		Input input = container.getInput();
+		 updateMovement(input, delta);
 		// TODO Auto-generated method stub
 		if(GameStarted == true){
 		ball.update();

@@ -32,12 +32,12 @@ public class Ball {
 		vy = vjump;
 	}
 	public void moveLeft() {
-		x -=50;
+		x -=5;
 	}
 
 
 	public void moveRight() {
-		x +=50;
+		x +=5;
 	}
 
 
