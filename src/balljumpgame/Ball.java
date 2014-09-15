@@ -9,22 +9,38 @@ public class Ball {
 	private float y;
 	private Image image;
 	private float vy;
+	private float vjump;
 	
-	public Ball (float x, float y) throws SlickException {
+	public Ball (float x, float y, float vjump) throws SlickException {
 	    this.x = x;
-	    this.y = y;	 	  
+	    this.y = y;	 
+	    this.vy = vjump;
+	    this.vjump = vjump;
 	    image = new Image("res/Ball.png");
 	  }
 	 
 	  public void render() {
-		  image.draw(BallJumpGame.GAME_WIDTH/2 - 20 ,BallJumpGame.GAME_HEIGHT - 40);
+		  image.draw(x - 20 ,y - 40);
 	  }
 
 	public void update() {
 		// TODO Auto-generated method stub
-		 y += vy;
-		    vy -= 1.5;
+		 y -= vy;
+		    vy -= BallJumpGame.Gravity;
 	}
-	
+	public void jump(){
+		vy = vjump;
+	}
+	public void moveLeft() {
+		x -=50;
+	}
+
+
+	public void moveRight() {
+		x +=50;
+	}
+
+
+
 
 }
