@@ -10,6 +10,8 @@ public class Ball {
 	private Image image;
 	private float vy;
 	private float vjump;
+	static public final float WIDTH = 40;
+	static public final float HEIGHT = 100;
 	
 	public Ball (float x, float y, float vjump) throws SlickException {
 	    this.x = x;
@@ -20,7 +22,7 @@ public class Ball {
 	  }
 	 
 	  public void render() {
-		  image.draw(x - 20 ,y - 40);
+		  image.draw(x - WIDTH/2 ,y - HEIGHT);
 	  }
 
 	public void update() {
