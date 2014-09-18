@@ -27,12 +27,12 @@ public class Cloud {
 		
 	}
 	public void randomX() {
-		  x =100 + random.nextInt(100);
+		  x =100 + random.nextInt(400);
 		  
 		  }
 	 public void update(){
 		  y += vy;
-		  if (y == -HEIGHT/2){
+		  if (y == BallJumpGame.GAME_HEIGHT + HEIGHT + 200){
 			  y = 0;
 			  randomX();
 		  }

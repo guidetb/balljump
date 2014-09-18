@@ -19,7 +19,7 @@ public class BallJumpGame extends BasicGame{
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 480;
 	public static final float Gravity = (float) 1.5;
-	public static final int CLOUD_COUNT = 5 ;
+	public static final int CLOUD_COUNT = 3 ;
 	public static final float CLOUD_VY = 5;
 
 	public BallJumpGame(String title) {
