@@ -38,4 +38,6 @@ public class Cloud {
 		  }
 		  
 	 }
+	 public float getPositionX() { return x; }
+	  public float getPositionY() { return y; }
 }
