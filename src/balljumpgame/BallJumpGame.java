@@ -15,6 +15,7 @@ public class BallJumpGame extends BasicGame{
 	private Background bg;
 	private Platform[] platforms;
 	private boolean GameStarted;
+	private boolean ShiftDown;
 	public static final float JUMP_VY = 22;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
@@ -62,21 +63,30 @@ public class BallJumpGame extends BasicGame{
 	private void initPlatform() throws SlickException {
 		platforms = new Platform[PLATFORM_COUNT];
 	    for (int i = 0; i < PLATFORM_COUNT; i++) {
-	    	platforms[i] = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
+	    	Platform Plat;
+	    	if(i == PLATFORM_COUNT-2){
+	    		Plat = new Platformslide(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
+	    	}
+	    	else{
+	    	Plat = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
 	    }
+	    	platforms[i] = Plat;
 	}
-
+	}
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		updateMovement(input, delta);
 		if(GameStarted == true){
-		
+		ShiftDown = false;
+		if(ball.getvy()<0){
+			ShiftDown = true;
+		}
 		ball.update();
+		
 		for(Platform platform : platforms){
 			bg.update();
 			platform.update();
-			
 			if (ball.isCollide(platform) == true){
 			      System.out.println("Collision!");
 			      //cloud.cloudMovement();

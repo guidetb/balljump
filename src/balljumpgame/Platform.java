@@ -9,10 +9,10 @@ import org.newdawn.slick.SlickException;
 
 public class Platform {
 	private Random random = new Random();
-	private Image platform ;
-	private float x;
-	private float y;
-	private float vy;
+	protected Image platform ;
+	protected float x;
+	protected float y;
+	protected float vy;
 	//private float vcm;
 	static public final float WIDTH = 200;
 	static public final float HEIGHT = 100; 
@@ -21,8 +21,11 @@ public class Platform {
 		    this.y = y;
 		    this.vy = vy;
 		    //this.vcm = vcm;
-		    platform = new Image("res/PF1.png");
+		    ImagePlatform();
 		
+	}
+	public void ImagePlatform() throws SlickException {
+		platform = new Image("res/PF1.png");
 	}
 	public void render(){
 		platform.draw(x-WIDTH/2,y-HEIGHT);
@@ -33,17 +36,19 @@ public class Platform {
 		  
 		  }
 	 public void update(){
-		  y += vy;
+		 Features();
 		  //vy -= BallJumpGame.Gravity_C;
-		  if (y == BallJumpGame.GAME_HEIGHT + HEIGHT + 200){
-			  y = 0;
-			  randomX();
-		  }
-		  
 	 }
 	 //public void cloudMovement(){
 		// vy = vcm;
 	 //}
+	public void Features() {
+		y += vy;
+		if (y == BallJumpGame.GAME_HEIGHT + HEIGHT + 200){
+			  y = 0;
+			  randomX();
+		  }
+	}
 	 
 	 public float getPositionX() { return x; }
 	 public float getPositionY() { return y; }

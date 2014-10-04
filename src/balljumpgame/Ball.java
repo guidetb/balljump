@@ -30,7 +30,7 @@ public class Ball {
 		// TODO Auto-generated method stub
 		 y -= vy;
 		    vy -= BallJumpGame.Gravity;
-		 if(x == 0){
+		 if(x == -WIDTH/2){
 			 x = BallJumpGame.GAME_WIDTH;
 		 }
 		 if(x == BallJumpGame.GAME_WIDTH){
@@ -50,6 +50,7 @@ public class Ball {
 		x +=8;
 	}
 	
+	public float getvy() {return vy;}
 	public boolean isCollide(Platform c) {
 		  return CollisionPlatform.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
 		  }
