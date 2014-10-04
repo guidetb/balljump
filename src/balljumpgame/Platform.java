@@ -29,7 +29,7 @@ public class Platform {
 		
 	}
 	public void randomX() {
-		  x =100 + random.nextInt(400);
+		  x = 100 + random.nextInt(450);
 		  
 		  }
 	 public void update(){

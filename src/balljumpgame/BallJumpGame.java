@@ -15,13 +15,13 @@ public class BallJumpGame extends BasicGame{
 	private Background bg;
 	private Platform[] platforms;
 	private boolean GameStarted;
-	public static final float JUMP_VY = 25;
+	public static final float JUMP_VY = 22;
 	public static final int GAME_WIDTH = 640;
-	public static final int GAME_HEIGHT = 480;
+	public static final int GAME_HEIGHT = 720;
 	public static final float Gravity = (float) 1.5;
-	public static final float Gravity_C = (float) 0.3;
-	public static final int CLOUD_COUNT = 3 ;
-	public static final float CLOUD_VY = 5;
+	//public static final float Gravity_C = (float) 0.3;
+	public static final int PLATFORM_COUNT = 5 ;
+	public static final float PLATFORM_VY = 5;
 	
 
 	public BallJumpGame(String title) {
@@ -52,7 +52,7 @@ public class BallJumpGame extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		Color background = new Color(255,192,203 );
 	    container.getGraphics().setBackground(background);
-	    bg = new Background(0,0,CLOUD_VY);
+	    bg = new Background(0,0,PLATFORM_VY);
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
 	    initPlatform();
@@ -60,9 +60,9 @@ public class BallJumpGame extends BasicGame{
 	}
 	
 	private void initPlatform() throws SlickException {
-		platforms = new Platform[CLOUD_COUNT];
-	    for (int i = 0; i < CLOUD_COUNT; i++) {
-	    	platforms[i] = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 250*i , CLOUD_VY);
+		platforms = new Platform[PLATFORM_COUNT];
+	    for (int i = 0; i < PLATFORM_COUNT; i++) {
+	    	platforms[i] = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
 	    }
 	}
 
