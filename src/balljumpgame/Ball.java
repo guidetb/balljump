@@ -50,7 +50,7 @@ public class Ball {
 		x +=8;
 	}
 	
-	public boolean isCollide(Cloud c) {
-		  return CollisionCloud.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
+	public boolean isCollide(Platform c) {
+		  return CollisionPlatform.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
 		  }
 }

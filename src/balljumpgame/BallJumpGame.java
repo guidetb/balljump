@@ -13,7 +13,7 @@ import org.newdawn.slick.SlickException;
 public class BallJumpGame extends BasicGame{
 	private Ball ball;
 	private Background bg;
-	private Cloud[] clouds;
+	private Platform[] platforms;
 	private boolean GameStarted;
 	public static final float JUMP_VY = 25;
 	public static final int GAME_WIDTH = 640;
@@ -43,8 +43,8 @@ public class BallJumpGame extends BasicGame{
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		bg.render();
 		ball.render();
-		for(Cloud cloud : clouds){
-		cloud.render();
+		for(Platform platform : platforms){
+			platform.render();
 		}
 	}
 
@@ -55,14 +55,14 @@ public class BallJumpGame extends BasicGame{
 	    bg = new Background(0,0,CLOUD_VY);
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
-	    initCloud();
+	    initPlatform();
 	    
 	}
 	
-	private void initCloud() throws SlickException {
-		clouds = new Cloud[CLOUD_COUNT];
+	private void initPlatform() throws SlickException {
+		platforms = new Platform[CLOUD_COUNT];
 	    for (int i = 0; i < CLOUD_COUNT; i++) {
-	    	clouds[i] = new Cloud(GAME_WIDTH/2, GAME_HEIGHT - 250*i , CLOUD_VY);
+	    	platforms[i] = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 250*i , CLOUD_VY);
 	    }
 	}
 
@@ -73,11 +73,11 @@ public class BallJumpGame extends BasicGame{
 		if(GameStarted == true){
 		
 		ball.update();
-		for(Cloud cloud : clouds){
+		for(Platform platform : platforms){
 			bg.update();
-			cloud.update();
+			platform.update();
 			
-			if (ball.isCollide(cloud) == true){
+			if (ball.isCollide(platform) == true){
 			      System.out.println("Collision!");
 			      //cloud.cloudMovement();
 			      ball.jump();

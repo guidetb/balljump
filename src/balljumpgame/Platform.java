@@ -7,25 +7,25 @@ import org.newdawn.slick.SlickException;
 
 
 
-public class Cloud {
+public class Platform {
 	private Random random = new Random();
-	private Image cloud;
+	private Image platform ;
 	private float x;
 	private float y;
 	private float vy;
 	//private float vcm;
 	static public final float WIDTH = 200;
 	static public final float HEIGHT = 100; 
-	public Cloud(float x, float y, float vy ) throws SlickException{
+	public Platform(float x, float y, float vy ) throws SlickException{
 		 	this.x = x;
 		    this.y = y;
 		    this.vy = vy;
 		    //this.vcm = vcm;
-		    cloud = new Image("res/clouds.png");
+		    platform = new Image("res/PF1.png");
 		
 	}
 	public void render(){
-		cloud.draw(x-WIDTH/2,y-HEIGHT);
+		platform.draw(x-WIDTH/2,y-HEIGHT);
 		
 	}
 	public void randomX() {
