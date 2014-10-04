@@ -12,14 +12,17 @@ import org.newdawn.slick.SlickException;
 
 public class BallJumpGame extends BasicGame{
 	private Ball ball;
+	private Background bg;
 	private Cloud[] clouds;
 	private boolean GameStarted;
 	public static final float JUMP_VY = 25;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 480;
 	public static final float Gravity = (float) 1.5;
+	public static final float Gravity_C = (float) 0.3;
 	public static final int CLOUD_COUNT = 3 ;
 	public static final float CLOUD_VY = 5;
+	
 
 	public BallJumpGame(String title) {
 		super(title);
@@ -38,6 +41,7 @@ public class BallJumpGame extends BasicGame{
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
+		bg.render();
 		ball.render();
 		for(Cloud cloud : clouds){
 		cloud.render();
@@ -48,6 +52,7 @@ public class BallJumpGame extends BasicGame{
 	public void init(GameContainer container) throws SlickException {
 		Color background = new Color(255,192,203 );
 	    container.getGraphics().setBackground(background);
+	    bg = new Background(0,0,CLOUD_VY);
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
 	    initCloud();
@@ -69,16 +74,20 @@ public class BallJumpGame extends BasicGame{
 		
 		ball.update();
 		for(Cloud cloud : clouds){
+			bg.update();
 			cloud.update();
+			
 			if (ball.isCollide(cloud) == true){
 			      System.out.println("Collision!");
+			      //cloud.cloudMovement();
 			      ball.jump();
-			     
+			      
 			      }
+		
+			}
 		
 		}
 		
-	}
 	}
 	
 	void updateMovement(Input input, int delta) {
@@ -94,13 +103,11 @@ public class BallJumpGame extends BasicGame{
 		try {
 			BallJumpGame game = new BallJumpGame ("BallJump");
 		      AppGameContainer appgc = new AppGameContainer(game);
-		      appgc.setDisplayMode(640,480, false);
+		      appgc.setDisplayMode(GAME_WIDTH,GAME_HEIGHT, false);
 		      appgc.setMinimumLogicUpdateInterval(1000 / 40);
 		      appgc.start();
 		    } catch (SlickException e) {
 		      e.printStackTrace();
 		    }
 		  }
-
-
 }

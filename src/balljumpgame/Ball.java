@@ -30,6 +30,12 @@ public class Ball {
 		// TODO Auto-generated method stub
 		 y -= vy;
 		    vy -= BallJumpGame.Gravity;
+		 if(x == 0){
+			 x = BallJumpGame.GAME_WIDTH;
+		 }
+		 if(x == BallJumpGame.GAME_WIDTH){
+			 x = 0;
+		 }
 	}
 	
 	public void jump(){
@@ -37,18 +43,14 @@ public class Ball {
 	}
 	
 	public void moveLeft() {
-		x -=5;
+		x -=8;
 	}
 
 	public void moveRight() {
-		x +=5;
+		x +=8;
 	}
 	
 	public boolean isCollide(Cloud c) {
 		  return CollisionCloud.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
 		  }
-
-
-
-
 }

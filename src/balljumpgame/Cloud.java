@@ -11,14 +11,16 @@ public class Cloud {
 	private Random random = new Random();
 	private Image cloud;
 	private float x;
-	  private float y;
-	  private float vy;
-	  static public final float WIDTH = 200;
-	  static public final float HEIGHT = 100; 
+	private float y;
+	private float vy;
+	//private float vcm;
+	static public final float WIDTH = 200;
+	static public final float HEIGHT = 100; 
 	public Cloud(float x, float y, float vy ) throws SlickException{
-		 this.x = x;
+		 	this.x = x;
 		    this.y = y;
 		    this.vy = vy;
+		    //this.vcm = vcm;
 		    cloud = new Image("res/clouds.png");
 		
 	}
@@ -32,12 +34,17 @@ public class Cloud {
 		  }
 	 public void update(){
 		  y += vy;
+		  //vy -= BallJumpGame.Gravity_C;
 		  if (y == BallJumpGame.GAME_HEIGHT + HEIGHT + 200){
 			  y = 0;
 			  randomX();
 		  }
 		  
 	 }
+	 //public void cloudMovement(){
+		// vy = vcm;
+	 //}
+	 
 	 public float getPositionX() { return x; }
-	  public float getPositionY() { return y; }
+	 public float getPositionY() { return y; }
 }
