@@ -88,8 +88,8 @@ public class BallJumpGame extends BasicGame{
 			bg.update();
 			platform.update();
 			if (ball.isCollide(platform) == true){
-			      System.out.println("Collision!");
-			      //cloud.cloudMovement();
+			      System.out.println("Collision!");	      
+				//cloud.cloudMovement();
 			      ball.jump();
 			      
 			      }

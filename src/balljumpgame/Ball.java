@@ -9,8 +9,8 @@ public class Ball {
 	private float x;
 	private  float y;
 	private Image image;
-	private float vy;
-	private float vjump;
+	private static float vy;
+	private static float vjump;
 	public static final float WIDTH = 40;
 	public static final float HEIGHT = 40;
 	
@@ -38,7 +38,7 @@ public class Ball {
 		 }
 	}
 	
-	public void jump(){
+	public static void jump(){
 		vy = vjump;
 	}
 	
