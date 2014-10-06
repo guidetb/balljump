@@ -73,6 +73,9 @@ public class BallJumpGame extends BasicGame{
 	    	if(i == PLATFORM_COUNT-2){
 	    		Plat = new Platformslide(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
 	    	}
+	    	else if(i == PLATFORM_COUNT -4 ){
+	    		Plat = new Platformslide2(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
+	    	}
 	    	else{
 	    	Plat = new Platform(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
 	    }
