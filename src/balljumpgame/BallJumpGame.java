@@ -14,6 +14,7 @@ public class BallJumpGame extends BasicGame{
 	private Ball ball;
 	private Background bg;
 	private Platform[] platforms;
+	private Gold[] golds; 
 	private boolean GameStarted;
 	private boolean ShiftDown;
 	public static final float JUMP_VY = 22;
@@ -23,6 +24,8 @@ public class BallJumpGame extends BasicGame{
 	//public static final float Gravity_C = (float) 0.3;
 	public static final int PLATFORM_COUNT = 5 ;
 	public static final float PLATFORM_VY = 5;
+	public static final int GOLD_COUNT = 5;
+	public static final float GOLD_VY = 12;
 	
 
 	public BallJumpGame(String title) {
@@ -47,6 +50,9 @@ public class BallJumpGame extends BasicGame{
 		for(Platform platform : platforms){
 			platform.render();
 		}
+		for(Gold gold : golds){
+			gold.render();
+		}
 	}
 
 	@Override
@@ -57,6 +63,7 @@ public class BallJumpGame extends BasicGame{
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
 	    initPlatform();
+	    initGold();
 	    
 	}
 	
@@ -73,6 +80,13 @@ public class BallJumpGame extends BasicGame{
 	    	platforms[i] = Plat;
 	}
 	}
+	
+	private void initGold() throws SlickException {
+		golds = new Gold[GOLD_COUNT];
+		for (int i = 0; i < GOLD_COUNT; i++){
+			golds[i] = new Gold(GAME_WIDTH/2, GAME_HEIGHT - 450*i, GOLD_VY);
+		}
+	}
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
@@ -83,6 +97,10 @@ public class BallJumpGame extends BasicGame{
 			ShiftDown = true;
 		}
 		ball.update();
+		
+		for(Gold gold : golds){
+			gold.update();
+		}
 		
 		for(Platform platform : platforms){
 			bg.update();
