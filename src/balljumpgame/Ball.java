@@ -14,6 +14,7 @@ public class Ball {
 	public static final float WIDTH = 40;
 	public static final float HEIGHT = 40;
 	
+	
 	public Ball (float x, float y, float vjump) throws SlickException {
 	    this.x = x;
 	    this.y = y;	 
@@ -52,6 +53,10 @@ public class Ball {
 	
 	public float getvy() {return vy;}
 	public boolean isCollide(Platform c) {
-		  return CollisionPlatform.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
+		 	return CollisionPlatform.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
 		  }
+	public boolean closeTogold(Gold g){
+			return CollisionGold.handleCollision(x, y, g.getPositionX(), g.getPositionY());
+		
+	}
 }

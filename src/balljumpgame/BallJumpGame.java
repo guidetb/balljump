@@ -16,7 +16,6 @@ public class BallJumpGame extends BasicGame{
 	private Platform[] platforms;
 	private Gold[] golds; 
 	private boolean GameStarted;
-	private boolean ShiftDown;
 	public static final float JUMP_VY = 22;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
@@ -91,15 +90,13 @@ public class BallJumpGame extends BasicGame{
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		updateMovement(input, delta);
-		if(GameStarted == true){
-		ShiftDown = false;
-		if(ball.getvy()<0){
-			ShiftDown = true;
-		}
-		ball.update();
-		
+		if(GameStarted == true){		
+		ball.update();		
 		for(Gold gold : golds){
 			gold.update();
+			if(ball.closeTogold(gold) == true){
+				System.out.println("GOLD!");
+			}
 		}
 		
 		for(Platform platform : platforms){

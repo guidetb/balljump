@@ -11,6 +11,8 @@ public class Gold {
 	private float vy;
 	private Image image;
 	private Random random = new Random();
+	public static final float WIDTH = 35;
+	public static final float HEIGHT = 35;
 
 	public Gold(float x, float y, float vy ) throws SlickException{
 		this.x = x;
@@ -29,8 +31,10 @@ public class Gold {
 			  randomX();
 		}
 	}
-		public void randomX() {
+	public void randomX() {
 			  x = 100 +  random.nextInt(1100);
 			  
 			  }
+	public float getPositionX() { return x; }
+	public float getPositionY() { return y; }
 }
