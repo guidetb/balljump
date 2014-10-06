@@ -97,9 +97,9 @@ public class BallJumpGame extends BasicGame{
 		ball.update();		
 		for(Gold gold : golds){
 			gold.update();
-			if(ball.closeTogold(gold) == true){
-				System.out.println("GOLD!");
-			}
+			//if(ball.closeTogold(gold) == true){
+				//System.out.println("GOLD!");
+			//}
 		}
 		
 		for(Platform platform : platforms){
