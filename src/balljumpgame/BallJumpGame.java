@@ -16,15 +16,15 @@ public class BallJumpGame extends BasicGame{
 	private Platform[] platforms;
 	private Gold[] golds; 
 	private boolean GameStarted;
-	public static final float JUMP_VY = 22;
+	public static final float JUMP_VY = 23;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
 	public static final float Gravity = (float) 1.5;
 	//public static final float Gravity_C = (float) 0.3;
 	public static final int PLATFORM_COUNT = 5 ;
-	public static final float PLATFORM_VY = 5;
+	public static final float PLATFORM_VY = 4;
 	public static final int GOLD_COUNT = 5;
-	public static final float GOLD_VY = 12;
+	public static final float GOLD_VY = 10;
 	
 
 	public BallJumpGame(String title) {
@@ -70,7 +70,7 @@ public class BallJumpGame extends BasicGame{
 		platforms = new Platform[PLATFORM_COUNT];
 	    for (int i = 0; i < PLATFORM_COUNT; i++) {
 	    	Platform Plat;
-	    	if(i == PLATFORM_COUNT-2){
+	    	if(i == PLATFORM_COUNT - 2){
 	    		Plat = new Platformslide(GAME_WIDTH/2, GAME_HEIGHT - 220*i , PLATFORM_VY);
 	    	}
 	    	else if(i == PLATFORM_COUNT -4 ){
@@ -107,7 +107,7 @@ public class BallJumpGame extends BasicGame{
 			platform.update();
 			if (ball.isCollide(platform) == true){
 			      System.out.println("Collision!");	      
-				//cloud.cloudMovement();
+				//platform.cloudMovement();
 			      ball.jump();
 			      
 			      }
@@ -132,7 +132,7 @@ public class BallJumpGame extends BasicGame{
 			BallJumpGame game = new BallJumpGame ("BallJump");
 		      AppGameContainer appgc = new AppGameContainer(game);
 		      appgc.setDisplayMode(GAME_WIDTH,GAME_HEIGHT, false);
-		      appgc.setMinimumLogicUpdateInterval(1000 / 40);
+		      appgc.setMinimumLogicUpdateInterval(1000 / 42);
 		      appgc.start();
 		    } catch (SlickException e) {
 		      e.printStackTrace();

@@ -31,8 +31,8 @@ public class Ball {
 		// TODO Auto-generated method stub
 		 y -= vy;
 		    vy -= BallJumpGame.Gravity;
-		 if(x == -WIDTH/2){
-			 x = BallJumpGame.GAME_WIDTH;
+		 if(x == -WIDTH){
+			 x = BallJumpGame.GAME_WIDTH - WIDTH/2;
 		 }
 		 if(x == BallJumpGame.GAME_WIDTH){
 			 x = 0;
