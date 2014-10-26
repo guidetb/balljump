@@ -23,12 +23,15 @@ public class BallJumpGame extends BasicGame{
 	//public static final float Gravity_C = (float) 0.3;
 	public static final int PLATFORM_COUNT = 5 ;
 	public static final float PLATFORM_VY = 4;
-	public static final int GOLD_COUNT = 5;
-	public static final float GOLD_VY = 10;
+	public static final int GOLD_COUNT = 4;
+	public static final float GOLD_VY = 8;
+	int score;
+	
 	
 
 	public BallJumpGame(String title) {
 		super(title);
+		
 	}
 	
 	@Override
@@ -52,6 +55,7 @@ public class BallJumpGame extends BasicGame{
 		for(Gold gold : golds){
 			gold.render();
 		}
+		g.drawString("Score " + score, 520, 0);
 	}
 
 	@Override
@@ -97,9 +101,9 @@ public class BallJumpGame extends BasicGame{
 		ball.update();		
 		for(Gold gold : golds){
 			gold.update();
-			//if(ball.closeTogold(gold) == true){
-				//System.out.println("GOLD!");
-			//}
+			if(ball.closeTogold(gold) == true){
+				System.out.println("GOLD!");
+			}
 		}
 		
 		for(Platform platform : platforms){
@@ -113,8 +117,9 @@ public class BallJumpGame extends BasicGame{
 			      }
 		
 			}
-		
+		score += PLATFORM_VY/4;
 		}
+		
 		
 	}
 	

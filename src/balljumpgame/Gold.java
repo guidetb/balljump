@@ -32,7 +32,7 @@ public class Gold {
 		}
 	}
 	public void randomX() {
-			  x = 100 +  random.nextInt(1100);
+			  x = 100 +  random.nextInt(400);
 			  
 			  }
 	public float getPositionX() { return x; }
