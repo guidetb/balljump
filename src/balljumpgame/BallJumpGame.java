@@ -19,7 +19,7 @@ public class BallJumpGame extends BasicGame{
 	private BlackHole[] blackholes; 
 	private boolean GameStarted;
 	private boolean GameOver;
-	private boolean restart;
+	private boolean ReStart;
 	public static final float JUMP_VY = 23;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
@@ -39,16 +39,15 @@ public class BallJumpGame extends BasicGame{
 		super(title);
 		
 	}
-	
 	public  void reset() throws SlickException{
-		if (GameStarted == true){
-		ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
-		score = 0;
-		initPlatform();
-	    initHole();
-		GameOver = false;
-		
-	}
+		if (ReStart == true){
+			ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
+		    GameStarted = false;
+		    GameOver = false;
+		    initPlatform();
+		    initHole();
+		    score = 0;
+		}
 	}
 	
 	@Override
@@ -59,6 +58,14 @@ public class BallJumpGame extends BasicGame{
 	    if (key == Input.KEY_ENTER) {		      
 		    	GameStarted = true;
 		    }
+	    if (key == Input.KEY_R) {
+	    		ReStart = true;
+	    		try {
+					reset();
+				} catch (SlickException e) {
+					e.printStackTrace();
+				}
+	    }
 	}
 
 	@Override
@@ -116,39 +123,38 @@ public class BallJumpGame extends BasicGame{
 	}
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		Input input = container.getInput();
-		updateMovement(input, delta);
 		if(GameOver == false){
-		if(GameStarted == true){		
-		ball.update();		
-		for(BlackHole hole : blackholes){
-			hole.update();
-			if(ball.closeToblackHole(hole) == true){
-				System.out.println("Hole!");
-				GameOver = true;
+			Input input = container.getInput();
+			updateMovement(input, delta);
+		
+			if(GameStarted == true){		
+				ball.update();		
+				for(BlackHole hole : blackholes){
+					hole.update();
+					if(ball.closeToblackHole(hole) == true){
+						System.out.println("Hole!");
+						GameOver = true;
+						GameStarted = false;
 				
-			}
-		}
+					}
+				}
 		
-		for(Platform platform : platforms){
-			bg.update();
-			platform.update();
-			if (ball.isCollide(platform) == true){
-			      System.out.println("Collision!");	      
-			      ball.jump();
-			      JumpSound.play();
-			      
-			      }
+				for(Platform platform : platforms){
+					bg.update();
+					platform.update();
+					if (ball.isCollide(platform) == true){
+						System.out.println("Collision!");	      
+						ball.jump();
+						JumpSound.play();
+					}
 		
+				}
+				score += PLATFORM_VY/4;
 			}
-		score += PLATFORM_VY/4;
-		}
 		}
 		else{
 			GameStarted = false;
 		}
-		
-		
 	}
 	
 	void updateMovement(Input input, int delta) {
