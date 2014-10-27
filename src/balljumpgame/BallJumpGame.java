@@ -24,14 +24,14 @@ public class BallJumpGame extends BasicGame{
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
 	public static final float Gravity = (float) 1.5;
-	public static final float Gravity_C = (float) 0.3;
 	public static final int PLATFORM_COUNT = 5 ;
 	public static final float PLATFORM_VY = 4;
 	public static final int HOLE_COUNT = 5;
 	public static final float HOLE_VY = 4;
-	int score;
+	float score;
 	Sound JumpSound;
 	private Image gameover;
+	private Image restart;
 	
 	
 
@@ -80,6 +80,7 @@ public class BallJumpGame extends BasicGame{
 		}
 		if(GameOver == true){
 			gameover.draw(185 , (float) 222.5);
+			restart.draw(155 , 500);
 		}
 		g.drawString("Score " + score, 520, 0);
 	}
@@ -96,6 +97,7 @@ public class BallJumpGame extends BasicGame{
 	    initHole();
 	    JumpSound = new Sound("res/Jumping.wav");
 	    gameover = new Image("res/gameover.png");
+	    restart = new Image("res/restart.png");
 	}
 	
 	private void initPlatform() throws SlickException {
@@ -128,31 +130,43 @@ public class BallJumpGame extends BasicGame{
 			updateMovement(input, delta);
 		
 			if(GameStarted == true){		
-				ball.update();		
+				ball.update();
+				handleEdge();
 				for(BlackHole hole : blackholes){
 					hole.update();
-					if(ball.closeToblackHole(hole) == true){
-						System.out.println("Hole!");
-						GameOver = true;
-						GameStarted = false;
-				
-					}
+					handleHole(hole);
 				}
 		
 				for(Platform platform : platforms){
 					bg.update();
 					platform.update();
-					if (ball.isCollide(platform) == true){
-						System.out.println("Collision!");	      
-						ball.jump();
-						JumpSound.play();
-					}
-		
+					handlePlat(platform);
 				}
 				score += PLATFORM_VY/4;
 			}
 		}
 		else{
+			GameStarted = false;
+		}
+	}
+	public void handlePlat(Platform platform) {
+		if (ball.isCollide(platform) == true){
+			System.out.println("Collision!");	      
+			ball.jump();
+			JumpSound.play();
+		}
+	}
+	public void handleHole(BlackHole hole) {
+		if(ball.closeToblackHole(hole) == true){
+			System.out.println("Hole!");
+			GameOver = true;
+			GameStarted = false;
+
+		}
+	}
+	public void handleEdge() {
+		if(ball.closeEdge() == true){
+			GameOver = true;
 			GameStarted = false;
 		}
 	}

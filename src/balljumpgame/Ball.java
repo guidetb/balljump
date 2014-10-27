@@ -24,7 +24,7 @@ public class Ball {
 	  }
 	 
 	public void render() {
-		  image.draw(x - WIDTH/2 ,y - 100);
+		  image.draw(x - WIDTH/2 ,y - 128);
 	  }
 
 	public void update() {
@@ -59,6 +59,13 @@ public class Ball {
 		  }
 	public boolean closeToblackHole(BlackHole g){
 			return CollisionHole.handleCollision(x, y, g.getPositionX(), g.getPositionY());
+		
+	}
+	public boolean closeEdge(){
+		if(((vy <= 0) && (y  >= BallJumpGame.GAME_HEIGHT + HEIGHT*3)) || ((vy > 0) && (y - HEIGHT*2 <= 0))){
+			return true;
+		}
+		return false;
 		
 	}
 }

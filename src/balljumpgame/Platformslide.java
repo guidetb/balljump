@@ -7,7 +7,6 @@ public class Platformslide extends Platform {
 
 	public Platformslide(float x, float y, float vy) throws SlickException {
 		super(x, y, vy);
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void ImagePlatform() throws SlickException {

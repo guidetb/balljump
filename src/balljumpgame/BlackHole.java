@@ -35,6 +35,10 @@ public class BlackHole {
 			  x = random.nextInt(1000);
 			  
 			  }
-	public float getPositionX() { return x; }
-	public float getPositionY() { return y; }
+	public float getPositionX() { 
+		return x; 
+		}
+	public float getPositionY() { 
+		return y; 
+		}
 }

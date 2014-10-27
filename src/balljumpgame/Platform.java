@@ -13,14 +13,13 @@ public class Platform {
 	protected float x;
 	protected float y;
 	protected float vy;
-	//private float vcm;
 	static public final float WIDTH = 200;
 	static public final float HEIGHT = 100; 
 	public Platform(float x, float y, float vy ) throws SlickException{
 		 	this.x = x;
 		    this.y = y;
 		    this.vy = vy;
-		    //this.vcm = vcm;
+		    
 		    ImagePlatform();
 		
 	}
@@ -37,11 +36,9 @@ public class Platform {
 		  }
 	 public void update(){
 		 Features();
-		  //vy -= BallJumpGame.Gravity_C;
+		  
 	 }
-	 //public void cloudMovement(){
-		// vy = vcm;
-	 //}
+	 
 	public void Features() {
 		y += vy;
 		if (y == BallJumpGame.GAME_HEIGHT + HEIGHT + 200){
