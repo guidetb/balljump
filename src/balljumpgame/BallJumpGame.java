@@ -5,6 +5,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -18,6 +19,7 @@ public class BallJumpGame extends BasicGame{
 	private BlackHole[] blackholes; 
 	private boolean GameStarted;
 	private boolean GameOver;
+	private boolean restart;
 	public static final float JUMP_VY = 23;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
@@ -29,12 +31,24 @@ public class BallJumpGame extends BasicGame{
 	public static final float HOLE_VY = 4;
 	int score;
 	Sound JumpSound;
+	private Image gameover;
 	
 	
 
 	public BallJumpGame(String title) {
 		super(title);
 		
+	}
+	
+	public  void reset() throws SlickException{
+		if (GameStarted == true){
+		ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
+		score = 0;
+		initPlatform();
+	    initHole();
+		GameOver = false;
+		
+	}
 	}
 	
 	@Override
@@ -44,7 +58,6 @@ public class BallJumpGame extends BasicGame{
 		    }
 	    if (key == Input.KEY_ENTER) {		      
 		    	GameStarted = true;
-		    	GameOver = false;
 		    }
 	}
 
@@ -58,6 +71,9 @@ public class BallJumpGame extends BasicGame{
 		for(Platform platform : platforms){
 			platform.render();
 		}
+		if(GameOver == true){
+			gameover.draw(185 , (float) 222.5);
+		}
 		g.drawString("Score " + score, 520, 0);
 	}
 
@@ -68,9 +84,11 @@ public class BallJumpGame extends BasicGame{
 	    bg = new Background(0,0,PLATFORM_VY);
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
+	    GameOver = false;
 	    initPlatform();
 	    initHole();
 	    JumpSound = new Sound("res/Jumping.wav");
+	    gameover = new Image("res/gameover.png");
 	}
 	
 	private void initPlatform() throws SlickException {
@@ -100,6 +118,7 @@ public class BallJumpGame extends BasicGame{
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		updateMovement(input, delta);
+		if(GameOver == false){
 		if(GameStarted == true){		
 		ball.update();		
 		for(BlackHole hole : blackholes){
@@ -107,7 +126,6 @@ public class BallJumpGame extends BasicGame{
 			if(ball.closeToblackHole(hole) == true){
 				System.out.println("Hole!");
 				GameOver = true;
-				GameStarted = false;
 				
 			}
 		}
@@ -124,6 +142,10 @@ public class BallJumpGame extends BasicGame{
 		
 			}
 		score += PLATFORM_VY/4;
+		}
+		}
+		else{
+			GameStarted = false;
 		}
 		
 		
