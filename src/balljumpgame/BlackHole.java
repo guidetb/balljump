@@ -5,23 +5,23 @@ import java.util.Random;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Gold {
+public class BlackHole {
 	private float x;
 	private float y;
 	private float vy;
 	private Image image;
 	private Random random = new Random();
-	public static final float WIDTH = 35;
-	public static final float HEIGHT = 35;
+	public static final float WIDTH = 65;
+	public static final float HEIGHT = 65;
 
-	public Gold(float x, float y, float vy ) throws SlickException{
+	public BlackHole(float x, float y, float vy ) throws SlickException{
 		this.x = x;
 	    this.y = y;
 	    this.vy = vy;
-	    image = new Image("res/Coinn.png");
+	    image = new Image("res/Avalanc.png");
 }
 	public void render(){
-		image.draw(x/2,y/2);
+		image.draw(x,y);
 	}
 	
 	public void update(){
@@ -32,7 +32,7 @@ public class Gold {
 		}
 	}
 	public void randomX() {
-			  x = 100 +  random.nextInt(400);
+			  x = random.nextInt(1000);
 			  
 			  }
 	public float getPositionX() { return x; }

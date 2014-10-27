@@ -7,6 +7,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 
 
@@ -14,18 +15,20 @@ public class BallJumpGame extends BasicGame{
 	private Ball ball;
 	private Background bg;
 	private Platform[] platforms;
-	private Gold[] golds; 
+	private BlackHole[] blackholes; 
 	private boolean GameStarted;
+	private boolean GameOver;
 	public static final float JUMP_VY = 23;
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 720;
 	public static final float Gravity = (float) 1.5;
-	//public static final float Gravity_C = (float) 0.3;
+	public static final float Gravity_C = (float) 0.3;
 	public static final int PLATFORM_COUNT = 5 ;
 	public static final float PLATFORM_VY = 4;
-	public static final int GOLD_COUNT = 4;
-	public static final float GOLD_VY = 8;
+	public static final int HOLE_COUNT = 5;
+	public static final float HOLE_VY = 4;
 	int score;
+	Sound JumpSound;
 	
 	
 
@@ -39,21 +42,21 @@ public class BallJumpGame extends BasicGame{
 		if (key == Input.KEY_SPACE) {		 
 		    	ball.jump();
 		    }
-		
 	    if (key == Input.KEY_ENTER) {		      
 		    	GameStarted = true;
+		    	GameOver = false;
 		    }
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		bg.render();
+		for(BlackHole hole : blackholes){
+			hole.render();
+		}
 		ball.render();
 		for(Platform platform : platforms){
 			platform.render();
-		}
-		for(Gold gold : golds){
-			gold.render();
 		}
 		g.drawString("Score " + score, 520, 0);
 	}
@@ -66,8 +69,8 @@ public class BallJumpGame extends BasicGame{
 	    ball = new Ball(GAME_WIDTH/2,GAME_HEIGHT,JUMP_VY);
 	    GameStarted = false;
 	    initPlatform();
-	    initGold();
-	    
+	    initHole();
+	    JumpSound = new Sound("res/Jumping.wav");
 	}
 	
 	private void initPlatform() throws SlickException {
@@ -87,10 +90,10 @@ public class BallJumpGame extends BasicGame{
 	}
 	}
 	
-	private void initGold() throws SlickException {
-		golds = new Gold[GOLD_COUNT];
-		for (int i = 0; i < GOLD_COUNT; i++){
-			golds[i] = new Gold(GAME_WIDTH/2, GAME_HEIGHT - 450*i, GOLD_VY);
+	private void initHole() throws SlickException {
+		blackholes = new BlackHole[HOLE_COUNT];
+		for (int i = 0; i < HOLE_COUNT; i++){
+			blackholes[i] = new BlackHole(GAME_WIDTH/2, GAME_HEIGHT - 450*i, HOLE_VY);
 		}
 	}
 	@Override
@@ -99,10 +102,13 @@ public class BallJumpGame extends BasicGame{
 		updateMovement(input, delta);
 		if(GameStarted == true){		
 		ball.update();		
-		for(Gold gold : golds){
-			gold.update();
-			if(ball.closeTogold(gold) == true){
-				System.out.println("GOLD!");
+		for(BlackHole hole : blackholes){
+			hole.update();
+			if(ball.closeToblackHole(hole) == true){
+				System.out.println("Hole!");
+				GameOver = true;
+				GameStarted = false;
+				
 			}
 		}
 		
@@ -111,8 +117,8 @@ public class BallJumpGame extends BasicGame{
 			platform.update();
 			if (ball.isCollide(platform) == true){
 			      System.out.println("Collision!");	      
-				//platform.cloudMovement();
 			      ball.jump();
+			      JumpSound.play();
 			      
 			      }
 		

@@ -43,20 +43,22 @@ public class Ball {
 		vy = vjump;
 	}
 	
-	public void moveLeft() {
-		x -=8;
+	public void moveLeft(){
+		x -=10;
 	}
 
-	public void moveRight() {
-		x +=8;
+	public void moveRight(){
+		x +=10;
 	}
 	
-	public float getvy() {return vy;}
-	public boolean isCollide(Platform c) {
+	public float getvy(){
+		return vy;
+	}
+	public boolean isCollide(Platform c){
 		 	return CollisionPlatform.Collide(x, y, vy, c.getPositionX(), c.getPositionY());
 		  }
-	public boolean closeTogold(Gold g){
-			return CollisionGold.handleCollision(x, y, g.getPositionX(), g.getPositionY());
+	public boolean closeToblackHole(BlackHole g){
+			return CollisionHole.handleCollision(x, y, g.getPositionX(), g.getPositionY());
 		
 	}
 }
